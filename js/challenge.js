@@ -5,18 +5,22 @@ const updateCounter = function () {
   counter.textContent = parseInt(counter.textContent) + 1;
 };
 
+let timerStopped = false;
+
 document.addEventListener("DOMContentLoaded", function () {
-  const timer = setInterval(updateCounter, 1000);
+  let timer = setInterval(updateCounter, 1000);
 
   const pause = document.querySelector("#pause");
 
   pause.addEventListener("click", function () {
-    if (timer) {
+    if (!timerStopped) {
       clearInterval(timer);
       pause.textContent = "resume";
-    } else if ((pause.textContent = "resume")) {
+      timerStopped = !timerStopped;
+    } else if (timerStopped) {
       pause.textContent = "pause";
-      setInterval(updateCounter, 1000);
+      timer = setInterval(updateCounter, 1000);
+      timerStopped = !timerStopped;
     }
   });
 
