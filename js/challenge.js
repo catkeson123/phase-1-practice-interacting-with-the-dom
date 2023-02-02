@@ -1,7 +1,25 @@
 const counter = document.querySelector("#counter");
 const likes = document.querySelector(".likes");
 
+const updateCounter = function () {
+  counter.textContent = parseInt(counter.textContent) + 1;
+};
+
 document.addEventListener("DOMContentLoaded", function () {
+  const timer = setInterval(updateCounter, 1000);
+
+  const pause = document.querySelector("#pause");
+
+  pause.addEventListener("click", function () {
+    if (timer) {
+      clearInterval(timer);
+      pause.textContent = "resume";
+    } else if ((pause.textContent = "resume")) {
+      pause.textContent = "pause";
+      setInterval(updateCounter, 1000);
+    }
+  });
+
   const plus = document.querySelector("#plus");
 
   plus.addEventListener("click", function () {
