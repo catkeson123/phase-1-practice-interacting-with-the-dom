@@ -53,6 +53,15 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     const comment = document.createElement("li");
     comment.textContent = e.target.comment.value;
+
+    const btn = document.createElement("button");
+    btn.textContent = "X";
+    comment.append(btn);
+
+    btn.addEventListener("click", () => {
+      comment.remove();
+    });
+
     commentList.append(comment);
     commentForm.reset();
   });
