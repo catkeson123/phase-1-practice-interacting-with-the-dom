@@ -39,9 +39,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const heart = document.querySelector("#heart");
 
   heart.addEventListener("click", function () {
-    const favorite = document.createElement("li");
-    favorite.textContent = "liked @ " + counter.textContent;
-    likes.append(favorite);
+    const foundFavorite = document.getElementById(`num-${counter.innerText}`);
+
+    if (foundFavorite) {
+      const likesCount = foundFavorite.querySelector("span");
+      ++likesCount.textContent;
+      if (likesCount.textContent == "2") {
+        foundFavorite.append("s");
+      }
+    } else {
+      const favorite = document.createElement("li");
+      favorite.id = `num-${counter.innerText}`;
+      favorite.innerHTML = `${counter.innerText} has been liked <span>1</span> time`;
+      likes.append(favorite);
+    }
   });
 
   const commentForm = document.querySelector("#comment-form");
@@ -52,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
   commentForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const comment = document.createElement("li");
-    comment.textContent = e.target.comment.value;
+    comment.textContent = e.target.comment.value + "  ";
 
     const btn = document.createElement("button");
     btn.textContent = "X";
