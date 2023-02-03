@@ -1,5 +1,6 @@
 const counter = document.querySelector("#counter");
 const likes = document.querySelector(".likes");
+const submitButton = document.querySelector("#submit");
 
 const updateCounter = function () {
   counter.textContent = parseInt(counter.textContent) + 1;
@@ -16,10 +17,18 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!timerStopped) {
       clearInterval(timer);
       pause.textContent = "resume";
+      minus.disabled = true;
+      plus.disabled = true;
+      heart.disabled = true;
+      submitButton.disabled = true;
       timerStopped = !timerStopped;
     } else if (timerStopped) {
       pause.textContent = "pause";
       timer = setInterval(updateCounter, 1000);
+      minus.disabled = false;
+      plus.disabled = false;
+      heart.disabled = false;
+      submitButton.disabled = false;
       timerStopped = !timerStopped;
     }
   });
